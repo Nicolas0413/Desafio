@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 
@@ -22,6 +23,7 @@ type Tarefa = {
   selector: 'app-desafio',
   templateUrl: 'desafio.html',
   styleUrls: ['desafio.scss'],
+  imports: [CommonModule]
 })
 
 
@@ -42,5 +44,101 @@ export class desafioComponent {
     {id: 4, titulo: "Compra_batedeira", concluida: true, prioridade: "alta", dataCriacao: new Date('2026-03-03')},
     {id: 5, titulo: "Preparar_feira", concluida: false, prioridade: "alta", dataCriacao: new Date('2026-03-04')}
     ]
+
+ formatarpreco(valor: number){
+  return(`R$ ${valor.toFixed(2)}`)
+}
+
+///////////////////////////////////////////////////
+
+calcular_total_estoque(produtos: Produto[]): number {
+  let total = 0
+
+  for (let produto of produtos) {
+     total += produto.preco * produto.estoque
+  }
+
+  return total
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+filtrar_tarefas(tarefas: Tarefa[], concluida: boolean): Tarefa[] {
+  return tarefas.filter(tarefa => tarefa.concluida === concluida)
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+contagem_por_prioridade(tarefas: Tarefa[]) {
+    let altas = 1
+    let medias = 1
+    let baixas = 1
+
+    for (let tarefa of tarefas) {
+        if (tarefa.prioridade === "alta")
+            altas += 1
+        if (tarefa.prioridade === "media")
+            medias += 1
+        if (tarefa.prioridade === "baixa")
+            baixas += 1
+    }
+    return (`Tarefas de prioridade alta: ${altas}\nTarefas de prioridade media: ${medias}\nTarefas de prioridade baixa: ${baixas}`)
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+cadastrar_produto(produtos: Produto[]) {
+
+  let id = produtos.length + 1
+  let nome = prompt("Nome do produto:")
+  let preco = Number(prompt("Preço do produto:"))
+  let estoque = Number(prompt("Quantidade em estoque:"))
+
+  let novoProduto: Produto = {
+    id: id,
+    nome: nome!,
+    preco: preco,
+    estoque: estoque
+  }
+
+  produtos.push(novoProduto)
+
+  console.log("Produto cadastrado com sucesso!")
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+marcar_tarefa_concluida(tarefas: Tarefa[]) {
+
+  let id = Number(prompt("Digite o ID da tarefa:"))
+
+  for (let tarefa of tarefas) {
+    if (tarefa.id === id) {
+      tarefa.concluida = true
+      console.log("Tarefa marcada como concluída!")
+      return
+    }
+  }
+
+  console.log("Tarefa não encontrada")
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+
+ordenar_por_prioridade(): Tarefa[] {
+
+  return this.Tarefas.sort((a, b) => {
+
+    const prioridade = {
+      alta: 3,
+      media: 2,
+      baixa: 1
+    }
+
+    return prioridade[b.prioridade] - prioridade[a.prioridade]
+
+  })
+}
 
 }
