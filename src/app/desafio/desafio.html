@@ -1,4 +1,11 @@
+<div id="ordenar_por_prioridade">
+    <p *ngFor="let item of ordenar_por_prioridade()">
+        {{ item.titulo }} - prioridade {{ item.prioridade}}
+    </p>
+</div>
 
-<p *ngFor="let item of ordenar_por_prioridade()">
-    {{ item.titulo }} - prioridade {{ item.prioridade}}
-</p>
+<div id="contagem_por_prioridade">
+    <p>
+        {{ contagem_por_prioridade() }}
+    </p>
+</div>
