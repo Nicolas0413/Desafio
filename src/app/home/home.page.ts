@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [desafioComponent ,IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [desafioComponent ,IonHeader, IonToolbar, IonTitle, IonContent, CommonModule],
 })
 export class HomePage {
   constructor() {}

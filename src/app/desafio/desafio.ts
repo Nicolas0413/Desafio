@@ -17,8 +17,6 @@ type Tarefa = {
   dataCriacao: Date
 }
 
-
-
 @Component({
   selector: 'app-desafio',
   templateUrl: 'desafio.html',
@@ -28,6 +26,7 @@ type Tarefa = {
 
 
 export class desafioComponent {
+
 
     Produtos: Produto[] = [
     { id: 1, nome: "Pastel", preco: 6, estoque: 6 },
@@ -45,30 +44,32 @@ export class desafioComponent {
     {id: 5, titulo: "Preparar_feira", concluida: false, prioridade: "alta", dataCriacao: new Date('2026-03-04')}
     ]
 
+    listando_produtos: boolean = true
+    listando_tarefas: boolean = true
     formatarpreco(valor: number){
         return(`R$ ${valor.toFixed(2)}`)
     }
 
 ///////////////////////////////////////////////////
-
-    calcular_total_estoque(produtos: Produto[]): number {
+    calculando_total_estoque: boolean = true;
+    calcular_total_estoque(): number {
     let total = 0
 
-    for (let produto of produtos) {
+    for (let produto of this.Produtos) {
         total += produto.preco * produto.estoque
     }
 
     return total
+    };
+
+////////////////////////////////////////////////////////////////////////////////////
+    filtrando_tarefas: boolean = true;
+    filtrar_tarefas(concluida: boolean): Tarefa[] {
+    return this.Tarefas.filter(tarefa => tarefa.concluida === concluida)
     }
 
 ////////////////////////////////////////////////////////////////////////////////////
-
-    filtrar_tarefas(tarefas: Tarefa[], concluida: boolean): Tarefa[] {
-    return tarefas.filter(tarefa => tarefa.concluida === concluida)
-    }
-
-////////////////////////////////////////////////////////////////////////////////////
-
+    contando_por_prioridade: boolean = true
     contagem_por_prioridade() {
         let altas = 1
         let medias = 1
@@ -125,7 +126,7 @@ export class desafioComponent {
     }
 
 //////////////////////////////////////////////////////////////////////////////////
-
+    ordenando_por_prioridade: boolean = true
     ordenar_por_prioridade(): Tarefa[] {
 
     return this.Tarefas.sort((a, b) => {
