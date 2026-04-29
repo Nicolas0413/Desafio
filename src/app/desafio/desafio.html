@@ -13,63 +13,70 @@
     </ion-toolbar>
   </ion-header>
 
-  
-<button (click)="listando_produtos = !listando_produtos">Listar Produtos</button>
-<div id="listar_rodutos" *ngIf="listando_produtos">
-    <table>
-    <tr *ngFor="let item of Produtos">
-        <td>id: {{ item.id}} </td> 
-        <td>nome: {{ item.nome }} </td>
-        <td>preço: {{ formatarpreco(item.preco) }} </td> 
-        <td>quantidade em estoque: {{ item.estoque }} </td>
-    </tr>
-    </table>
-</div>
+<div class="sheet">
+    <button class="button_outline" (click)="listando_produtos = !listando_produtos">Listar Produtos</button><br>
+    <div id="listar_rodutos" *ngIf="listando_produtos">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Nome</th>
+                <th>preço</th>
+                <th>Quantidade em estoque</th>
+            </tr>
+            <tr *ngFor="let item of Produtos">
+                <td>{{ item.id}} </td> 
+                <td>{{ item.nome }} </td>
+                <td>{{ formatarpreco(item.preco) }} </td> 
+                <td>{{ item.estoque }} </td>
+            </tr>
+        </table>
+    </div>
 
-<button (click)="listando_tarefas = !listando_tarefas">Listar Produtos</button>
-<div id="listar_tarefas" *ngIf="listando_tarefas">
-    <table>
-        <tr>
-            <th>id</th>
-            <th>Titulo</th>
-            <th>Status</th>
-            <th>Prioridade</th>
-            <th>Data de cadastro</th>
-        </tr>
-    <tr *ngFor="let item of Tarefas">
-        <td>{{ item.id}} </td> 
-        <td>titulo: {{ item.titulo }} </td>
-        <td *ngIf="item.concluida; else naoconcluida">Concluída</td>
-        <ng-template #naoconcluida><td>Não concluida</td></ng-template> 
-        <td>{{ item.prioridade }} </td>
-        <td>{{item.dataCriacao}}</td>
-    </tr>
-    </table>
-</div>
+    <button class="button_outline" (click)="listando_tarefas = !listando_tarefas">Listar Tarefas</button><br>
+    <div id="listar_tarefas" *ngIf="listando_tarefas" class="mostrar">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Titulo</th>
+                <th>Status</th>
+                <th>Prioridade</th>
+                <th>Data de cadastro</th>
+            </tr>
+            <tr *ngFor="let item of Tarefas">
+                <td>{{ item.id}} </td> 
+                <td>{{ item.titulo }} </td>
+                <td *ngIf="item.concluida; else naoconcluida">Concluída</td>
+                <ng-template #naoconcluida><td>Não concluida</td></ng-template> 
+                <td>{{ item.prioridade }} </td>
+                <td>{{item.dataCriacao}}</td>
+            </tr>
+        </table>
+    </div>
 
-<button (click)="contando_por_prioridade = !contando_por_prioridade">Contar tarefas por prioridade</button>
-<div id="contagem_por_prioridade" *ngIf="contando_por_prioridade">
-    <p>
-        {{ contagem_por_prioridade() }}
-    </p>
-</div>
+    <button class="button_outline" (click)="contando_por_prioridade = !contando_por_prioridade">Contar tarefas por prioridade</button><br>
+    <div id="contagem_por_prioridade" *ngIf="contando_por_prioridade" class="mostrar">
+        
+        <p [innerHTML]="contagem_por_prioridade()"></p>
 
-<button (click)="calculando_total_estoque = !calculando_total_estoque">Calcular valor total do estoque</button>
-<div id="calcular_total_estoque" *ngIf="calculando_total_estoque">
-    <p>
-        {{ calcular_total_estoque() }}
-    </p>
-</div>
+    </div>
 
-<button (click)="ordenando_por_prioridade = !ordenando_por_prioridade">Ordenar tarefas por prioridade</button>
-<div id="ordenar_por_prioridade" *ngIf="ordenando_por_prioridade">
-    <p *ngFor="let item of ordenar_por_prioridade()">
-        {{ item.titulo }} - prioridade {{ item.prioridade}}
-    </p>
-</div>
+    <button class="button_outline" (click)="calculando_total_estoque = !calculando_total_estoque">Calcular valor total do estoque</button><br>
+    <div id="calcular_total_estoque" *ngIf="calculando_total_estoque" class="mostrar">
+        <p>
+            {{ calcular_total_estoque() }} itens em estoque
+        </p>
+    </div>
 
-    <button>
-        Menu de funcionalidades
-    </button>
+    <button class="button_outline" (click)="ordenando_por_prioridade = !ordenando_por_prioridade">Ordenar tarefas por prioridade</button><br>
+    <div id="ordenar_por_prioridade" *ngIf="ordenando_por_prioridade" class="mostrar">
+        <p *ngFor="let item of ordenar_por_prioridade()">
+            {{ item.titulo }} - prioridade {{ item.prioridade}}
+        </p>
+    </div>
 
+        <a class="button_outline">
+            Menu de funcionalidades
+        </a>
+        
+    </div>
 </ion-content>

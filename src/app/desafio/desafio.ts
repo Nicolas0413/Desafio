@@ -38,21 +38,21 @@ export class desafioComponent {
     ]
 
     Tarefas: Tarefa[] = [
-    {id: 1, titulo: "Entrega_de_Empada", concluida: true, prioridade: "media", dataCriacao: new Date('2026-02-28')},
-    {id: 2, titulo: "Assar_massa", concluida: false, prioridade: "baixa", dataCriacao: new Date('2026-03-02')},
-    {id: 3, titulo: "rechear_Pastel", concluida: true, prioridade:  "media", dataCriacao: new Date('2026-03-03')},
-    {id: 4, titulo: "Compra_batedeira", concluida: true, prioridade: "alta", dataCriacao: new Date('2026-03-03')},
-    {id: 5, titulo: "Preparar_feira", concluida: false, prioridade: "alta", dataCriacao: new Date('2026-03-04')}
+    {id: 1, titulo: "Entrega de Empada", concluida: true, prioridade: "media", dataCriacao: new Date('2026-02-28')},
+    {id: 2, titulo: "Assar massa", concluida: false, prioridade: "baixa", dataCriacao: new Date('2026-03-02')},
+    {id: 3, titulo: "rechear Pastel", concluida: true, prioridade:  "media", dataCriacao: new Date('2026-03-03')},
+    {id: 4, titulo: "Compra batedeira", concluida: true, prioridade: "alta", dataCriacao: new Date('2026-03-03')},
+    {id: 5, titulo: "Preparar feira", concluida: false, prioridade: "alta", dataCriacao: new Date('2026-03-04')}
     ]
 
-    listando_produtos: boolean = true
-    listando_tarefas: boolean = true
+    listando_produtos: boolean = false
+    listando_tarefas: boolean = false
     formatarpreco(valor: number){
         return(`R$ ${valor.toFixed(2)}`)
     }
 
 ///////////////////////////////////////////////////
-    calculando_total_estoque: boolean = true;
+    calculando_total_estoque: boolean = false;
     calcular_total_estoque(): number {
     let total = 0
 
@@ -64,17 +64,18 @@ export class desafioComponent {
     };
 
 ////////////////////////////////////////////////////////////////////////////////////
-    filtrando_tarefas: boolean = true;
+    filtrando_tarefas: boolean = false;
     filtrar_tarefas(concluida: boolean): Tarefa[] {
     return this.Tarefas.filter(tarefa => tarefa.concluida === concluida)
     }
 
 ////////////////////////////////////////////////////////////////////////////////////
-    contando_por_prioridade: boolean = true
+
+    contando_por_prioridade: boolean = false
     contagem_por_prioridade() {
-        let altas = 1
-        let medias = 1
-        let baixas = 1
+        let altas = 0
+        let medias = 0
+        let baixas = 0
 
         for (let tarefa of this.Tarefas) {
             if (tarefa.prioridade === "alta")
@@ -84,7 +85,11 @@ export class desafioComponent {
             if (tarefa.prioridade === "baixa")
                 baixas += 1
         }
-        return (`Tarefas de prioridade alta: ${altas}\nTarefas de prioridade media: ${medias}\nTarefas de prioridade baixa: ${baixas}`)
+        return (`Tarefas de prioridade alta: ${altas}</br></br>
+            
+            Tarefas de prioridade media: ${medias}</br></br>
+            
+            Tarefas de prioridade baixa: ${baixas}`)
 
     }
 
@@ -127,7 +132,7 @@ export class desafioComponent {
     }
 
 //////////////////////////////////////////////////////////////////////////////////
-    ordenando_por_prioridade: boolean = true
+    ordenando_por_prioridade: boolean = false
     ordenar_por_prioridade(): Tarefa[] {
 
     return this.Tarefas.sort((a, b) => {
