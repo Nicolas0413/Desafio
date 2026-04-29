@@ -1,5 +1,6 @@
-import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
+import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
 
 type Produto = {
@@ -21,7 +22,7 @@ type Tarefa = {
   selector: 'app-desafio',
   templateUrl: 'desafio.html',
   styleUrls: ['desafio.scss'],
-  imports: [CommonModule]
+  imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonContent]
 })
 
 

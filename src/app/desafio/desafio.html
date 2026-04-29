@@ -1,12 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Menu de interação
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  
 <button (click)="listando_produtos = !listando_produtos">Listar Produtos</button>
 <div id="listar_rodutos" *ngIf="listando_produtos">
     <table>
@@ -61,6 +68,8 @@
     </p>
 </div>
 
+    <button>
+        Menu de funcionalidades
+    </button>
 
-</body>
-</html>
+</ion-content>
