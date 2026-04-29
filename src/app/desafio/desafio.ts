@@ -65,6 +65,7 @@ export class desafioComponent {
 
 ////////////////////////////////////////////////////////////////////////////////////
     filtrando_tarefas: boolean = false;
+    filtrando_tarefas2: boolean = false;
     filtrar_tarefas(concluida: boolean): Tarefa[] {
     return this.Tarefas.filter(tarefa => tarefa.concluida === concluida)
     }
@@ -95,9 +96,9 @@ export class desafioComponent {
 
 //////////////////////////////////////////////////////////////////////////////////
 
-    cadastrar_produto(produtos: Produto[]) {
+    cadastrar_produto() {
 
-    let id = produtos.length + 1
+    let id = this.Produtos.length + 1
     let nome = prompt("Nome do produto:")
     let preco = Number(prompt("Preço do produto:"))
     let estoque = Number(prompt("Quantidade em estoque:"))
@@ -109,18 +110,18 @@ export class desafioComponent {
         estoque: estoque
     }
 
-    produtos.push(novoProduto)
+    this.Produtos.push(novoProduto)
 
     console.log("Produto cadastrado com sucesso!")
     }
 
 //////////////////////////////////////////////////////////////////////////////////
 
-    marcar_tarefa_concluida(tarefas: Tarefa[]) {
+    marcar_tarefa_concluida() {
 
     let id = Number(prompt("Digite o ID da tarefa:"))
 
-    for (let tarefa of tarefas) {
+    for (let tarefa of this.Tarefas) {
         if (tarefa.id === id) {
         tarefa.concluida = true
         console.log("Tarefa marcada como concluída!")

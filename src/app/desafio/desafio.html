@@ -32,6 +32,13 @@
         </table>
     </div>
 
+    <button class="button_outline" (click)="calculando_total_estoque = !calculando_total_estoque">Calcular valor total do estoque</button><br>
+    <div id="calcular_total_estoque" *ngIf="calculando_total_estoque" class="mostrar">
+        <p>
+            {{ calcular_total_estoque() }} itens em estoque
+        </p>
+    </div>
+
     <button class="button_outline" (click)="listando_tarefas = !listando_tarefas">Listar Tarefas</button><br>
     <div id="listar_tarefas" *ngIf="listando_tarefas" class="mostrar">
         <table>
@@ -53,6 +60,56 @@
         </table>
     </div>
 
+    <button class="button_outline" (click)="filtrando_tarefas = !filtrando_tarefas">Listar Tarefas concluidas</button><br>
+    <div id="filtrar_tarefas" *ngIf="filtrando_tarefas" class="mostrar">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Titulo</th>
+                <th>Status</th>
+                <th>Prioridade</th>
+                <th>Data de cadastro</th>
+            </tr>
+
+            <ng-container *ngFor="let item of Tarefas">
+            <tr *ngIf="item.concluida === true">
+                <td>{{ item.id}} </td> 
+                <td>{{ item.titulo }} </td>
+                <td *ngIf="item.concluida; else naoconcluida">Concluída</td>
+                <ng-template #naoconcluida><td>Não concluida</td></ng-template> 
+                <td>{{ item.prioridade }} </td>
+                <td>{{item.dataCriacao}}</td>
+            </tr>
+            </ng-container>
+
+        </table>
+    </div>
+
+    <button class="button_outline" (click)="filtrando_tarefas2 = !filtrando_tarefas2">Listar Tarefas não concluidas</button><br>
+    <div id="filtrar_tarefas2" *ngIf="filtrando_tarefas2" class="mostrar">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Titulo</th>
+                <th>Status</th>
+                <th>Prioridade</th>
+                <th>Data de cadastro</th>
+            </tr>
+
+            <ng-container *ngFor="let item of Tarefas">
+            <tr *ngIf="item.concluida === false">
+                <td>{{ item.id}} </td> 
+                <td>{{ item.titulo }} </td>
+                <td *ngIf="item.concluida; else naoconcluida">Concluída</td>
+                <ng-template #naoconcluida><td>Não concluida</td></ng-template> 
+                <td>{{ item.prioridade }} </td>
+                <td>{{item.dataCriacao}}</td>
+            </tr>
+            </ng-container>
+
+        </table>
+    </div>
+
     <button class="button_outline" (click)="contando_por_prioridade = !contando_por_prioridade">Contar tarefas por prioridade</button><br>
     <div id="contagem_por_prioridade" *ngIf="contando_por_prioridade" class="mostrar">
         
@@ -60,23 +117,20 @@
 
     </div>
 
-    <button class="button_outline" (click)="calculando_total_estoque = !calculando_total_estoque">Calcular valor total do estoque</button><br>
-    <div id="calcular_total_estoque" *ngIf="calculando_total_estoque" class="mostrar">
-        <p>
-            {{ calcular_total_estoque() }} itens em estoque
-        </p>
-    </div>
-
-    <button class="button_outline" (click)="ordenando_por_prioridade = !ordenando_por_prioridade">Ordenar tarefas por prioridade</button><br>
-    <div id="ordenar_por_prioridade" *ngIf="ordenando_por_prioridade" class="mostrar">
-        <p *ngFor="let item of ordenar_por_prioridade()">
-            {{ item.titulo }} - prioridade {{ item.prioridade}}
-        </p>
-    </div>
-
         <a class="button_outline">
             Menu de funcionalidades
         </a>
         
+    </div>
+
+    <div class="sheet">
+        <button class="button_outline" (click)="cadastrar_produto()">Cadastrar produto</button><br>
+        <button class="button_outline" (click)="marcar_tarefa_concluida()">Marcar tarefa como concluida</button><br>
+        <button class="button_outline" (click)="ordenando_por_prioridade = !ordenando_por_prioridade">Ordenar tarefas por prioridade</button><br>
+        <div id="ordenar_por_prioridade" *ngIf="ordenando_por_prioridade" class="mostrar">
+            <p *ngFor="let item of ordenar_por_prioridade()">
+                {{ item.titulo }} - prioridade {{ item.prioridade}}
+            </p>
+        </div>
     </div>
 </ion-content>
