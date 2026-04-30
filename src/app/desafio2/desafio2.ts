@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
-import { salvarDados } from '../fuctions';
+import { salvarDados } from '../functions';
+import { carregarDados } from '../functions';
 
 type Produto = {
   id: number
@@ -52,50 +53,10 @@ export class desafioComponent2 {
         return(`R$ ${valor.toFixed(2)}`)
     }
 
-///////////////////////////////////////////////////
-    calculando_total_estoque: boolean = false;
-    calcular_total_estoque(): number {
-    let total = 0
 
-    for (let produto of this.Produtos) {
-        total += produto.preco * produto.estoque
+    ngOnInit(){
+        carregarDados
     }
-
-    return total
-    };
-
-////////////////////////////////////////////////////////////////////////////////////
-    filtrando_tarefas: boolean = false;
-    filtrando_tarefas2: boolean = false;
-    filtrar_tarefas(concluida: boolean): Tarefa[] {
-    return this.Tarefas.filter(tarefa => tarefa.concluida === concluida)
-    }
-
-////////////////////////////////////////////////////////////////////////////////////
-
-    contando_por_prioridade: boolean = false
-    contagem_por_prioridade() {
-        let altas = 0
-        let medias = 0
-        let baixas = 0
-
-        for (let tarefa of this.Tarefas) {
-            if (tarefa.prioridade === "alta")
-                altas += 1
-            if (tarefa.prioridade === "media")
-                medias += 1
-            if (tarefa.prioridade === "baixa")
-                baixas += 1
-        }
-        return (`Tarefas de prioridade alta: ${altas}</br></br>
-            
-            Tarefas de prioridade media: ${medias}</br></br>
-            
-            Tarefas de prioridade baixa: ${baixas}`)
-
-    }
-
-//////////////////////////////////////////////////////////////////////////////////
 
     cadastrar_produto() {
 
@@ -104,19 +65,20 @@ export class desafioComponent2 {
     let preco = Number(prompt("Preço do produto:"))
     let estoque = Number(prompt("Quantidade em estoque:"))
 
+    
+
     let novoProduto: Produto = {
         id: id,
         nome: nome!,
         preco: preco,
         estoque: estoque
     }
-
+    
     this.Produtos.push(novoProduto)
 
     console.log("Produto cadastrado com sucesso!")
+    salvarDados
     }
-
-//////////////////////////////////////////////////////////////////////////////////
 
     marcar_tarefa_concluida() {
 
@@ -133,7 +95,6 @@ export class desafioComponent2 {
     console.log("Tarefa não encontrada")
     }
 
-//////////////////////////////////////////////////////////////////////////////////
     ordenando_por_prioridade: boolean = false
     ordenar_por_prioridade(): Tarefa[] {
 
@@ -149,6 +110,7 @@ export class desafioComponent2 {
 
     })
     }
+
     ir_para(onde_ir: string) {
         window.location.href = onde_ir
     }

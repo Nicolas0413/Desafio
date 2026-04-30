@@ -3,6 +3,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/stan
 import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
 import { salvarDados } from '../functions';
+import { carregarDados } from '../functions';
 
 export type Produto = {
   id: number
@@ -29,6 +30,9 @@ export type Tarefa = {
 
 export class desafioComponent {
 
+    ngOnInit(){
+        carregarDados()
+    }
 
     Produtos: Produto[] = [
     { id: 1, nome: "Pastel", preco: 6, estoque: 6 },
@@ -95,63 +99,9 @@ export class desafioComponent {
 
     }
 
-//////////////////////////////////////////////////////////////////////////////////
-
-    cadastrar_produto() {
-
-    let id = this.Produtos.length + 1
-    let nome = prompt("Nome do produto:")
-    let preco = Number(prompt("Preço do produto:"))
-    let estoque = Number(prompt("Quantidade em estoque:"))
-
-    let novoProduto: Produto = {
-        id: id,
-        nome: nome!,
-        preco: preco,
-        estoque: estoque
-    }
-
-    this.Produtos.push(novoProduto)
-
-    console.log("Produto cadastrado com sucesso!")
-    }
-
-//////////////////////////////////////////////////////////////////////////////////
-
-    marcar_tarefa_concluida() {
-
-    let id = Number(prompt("Digite o ID da tarefa:"))
-
-    for (let tarefa of this.Tarefas) {
-        if (tarefa.id === id) {
-        tarefa.concluida = true
-        console.log("Tarefa marcada como concluída!")
-        return
-        }
-    }
-
-    console.log("Tarefa não encontrada")
-    }
-
-//////////////////////////////////////////////////////////////////////////////////
-    ordenando_por_prioridade: boolean = false
-    ordenar_por_prioridade(): Tarefa[] {
-
-    return this.Tarefas.sort((a, b) => {
-
-        const prioridade = {
-        alta: 3,
-        media: 2,
-        baixa: 1
-        }
-
-        return prioridade[b.prioridade] - prioridade[a.prioridade]
-
-    })
-    }
-
     ir_para(onde_ir: string) {
         window.location.href = onde_ir
     }
 
+    
 }
