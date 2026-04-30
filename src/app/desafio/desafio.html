@@ -117,20 +117,9 @@
 
     </div>
 
-        <a class="button_outline">
+        <button class="button_outline" (click)="ir_para('/funcionalidades')">
             Menu de funcionalidades
-        </a>
+        </button>
         
-    </div>
-
-    <div class="sheet">
-        <button class="button_outline" (click)="cadastrar_produto()">Cadastrar produto</button><br>
-        <button class="button_outline" (click)="marcar_tarefa_concluida()">Marcar tarefa como concluida</button><br>
-        <button class="button_outline" (click)="ordenando_por_prioridade = !ordenando_por_prioridade">Ordenar tarefas por prioridade</button><br>
-        <div id="ordenar_por_prioridade" *ngIf="ordenando_por_prioridade" class="mostrar">
-            <p *ngFor="let item of ordenar_por_prioridade()">
-                {{ item.titulo }} - prioridade {{ item.prioridade}}
-            </p>
-        </div>
     </div>
 </ion-content>

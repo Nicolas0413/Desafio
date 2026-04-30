@@ -1,17 +1,17 @@
-import { Component, ɵunwrapSafeValue } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
-import { salvarDados } from '../functions';
+import { salvarDados } from '../fuctions';
 
-export type Produto = {
+type Produto = {
   id: number
   nome: string
   preco: number
   estoque: number
 }
 
-export type Tarefa = {
+type Tarefa = {
   id: number
   titulo: string
   concluida: boolean
@@ -20,14 +20,14 @@ export type Tarefa = {
 }
 
 @Component({
-  selector: 'app-desafio',
-  templateUrl: 'desafio.html',
-  styleUrls: ['desafio.scss'],
+  selector: 'app-desafio2',
+  templateUrl: 'desafio2.html',
+  styleUrls: ['desafio2.scss'],
   imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonContent]
 })
 
 
-export class desafioComponent {
+export class desafioComponent2 {
 
 
     Produtos: Produto[] = [
@@ -149,9 +149,7 @@ export class desafioComponent {
 
     })
     }
-
     ir_para(onde_ir: string) {
         window.location.href = onde_ir
     }
-
 }
