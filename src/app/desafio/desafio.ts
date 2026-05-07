@@ -2,23 +2,8 @@ import { Component, ɵunwrapSafeValue } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Router } from "@angular/router";
-import { salvarDados } from '../functions';
-import { carregarDados } from '../functions';
+import { DataService, Tarefa } from '../data.service';
 
-export type Produto = {
-  id: number
-  nome: string
-  preco: number
-  estoque: number
-}
-
-export type Tarefa = {
-  id: number
-  titulo: string
-  concluida: boolean
-  prioridade: "baixa" | "media" | "alta"
-  dataCriacao: Date
-}
 
 @Component({
   selector: 'app-desafio',
@@ -29,27 +14,11 @@ export type Tarefa = {
 
 
 export class desafioComponent {
-
-    ngOnInit(){
-        carregarDados()
-    }
-
-    Produtos: Produto[] = [
-    { id: 1, nome: "Pastel", preco: 6, estoque: 6 },
-    { id: 2, nome: "Pizza", preco: 7, estoque: 7 },
-    { id: 3, nome: "Quiche", preco: 6, estoque: 4 },
-    { id: 4, nome: "Empada", preco: 7, estoque: 8 },
-    { id: 5, nome: "Empadão", preco: 16, estoque: 1 }
-    ]
-
-    Tarefas: Tarefa[] = [
-    {id: 1, titulo: "Entrega de Empada", concluida: true, prioridade: "media", dataCriacao: new Date('2026-02-28')},
-    {id: 2, titulo: "Assar massa", concluida: false, prioridade: "baixa", dataCriacao: new Date('2026-03-02')},
-    {id: 3, titulo: "rechear Pastel", concluida: true, prioridade:  "media", dataCriacao: new Date('2026-03-03')},
-    {id: 4, titulo: "Compra batedeira", concluida: true, prioridade: "alta", dataCriacao: new Date('2026-03-03')},
-    {id: 5, titulo: "Preparar feira", concluida: false, prioridade: "alta", dataCriacao: new Date('2026-03-04')}
-    ]
-
+    constructor(
+        public dataService: DataService,
+        private router: Router
+    ) {}
+    
     listando_produtos: boolean = false
     listando_tarefas: boolean = false
     formatarpreco(valor: number){
@@ -59,20 +28,14 @@ export class desafioComponent {
 ///////////////////////////////////////////////////
     calculando_total_estoque: boolean = false;
     calcular_total_estoque(): number {
-    let total = 0
-
-    for (let produto of this.Produtos) {
-        total += produto.preco * produto.estoque
-    }
-
-    return total
+        return this.dataService.Produtos.reduce((acc, p) => acc + (p.preco * p.estoque), 0);
     };
 
 ////////////////////////////////////////////////////////////////////////////////////
     filtrando_tarefas: boolean = false;
     filtrando_tarefas2: boolean = false;
     filtrar_tarefas(concluida: boolean): Tarefa[] {
-    return this.Tarefas.filter(tarefa => tarefa.concluida === concluida)
+    return this.dataService.Tarefas.filter(tarefa => tarefa.concluida === concluida)
     }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +46,7 @@ export class desafioComponent {
         let medias = 0
         let baixas = 0
 
-        for (let tarefa of this.Tarefas) {
+        for (let tarefa of this.dataService.Tarefas) {
             if (tarefa.prioridade === "alta")
                 altas += 1
             if (tarefa.prioridade === "media")
@@ -99,9 +62,9 @@ export class desafioComponent {
 
     }
 
-    ir_para(onde_ir: string) {
-        window.location.href = onde_ir
+    
+    ir_para(onde: string) { 
+        this.router.navigateByUrl(onde); 
     }
-
     
 }

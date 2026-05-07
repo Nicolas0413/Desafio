@@ -23,7 +23,7 @@
                 <th>preço</th>
                 <th>Quantidade em estoque</th>
             </tr>
-            <tr *ngFor="let item of Produtos">
+            <tr *ngFor="let item of dataService.Produtos">
                 <td>{{ item.id}} </td> 
                 <td>{{ item.nome }} </td>
                 <td>{{ formatarpreco(item.preco) }} </td> 
@@ -35,7 +35,8 @@
     <button class="button_outline" (click)="calculando_total_estoque = !calculando_total_estoque">Calcular valor total do estoque</button><br>
     <div id="calcular_total_estoque" *ngIf="calculando_total_estoque" class="mostrar">
         <p>
-            {{ calcular_total_estoque() }} itens em estoque
+            a soma do valor de todos os produtos em estoque é:<br>
+            {{ formatarpreco(calcular_total_estoque()) }}
         </p>
     </div>
 
@@ -49,11 +50,11 @@
                 <th>Prioridade</th>
                 <th>Data de cadastro</th>
             </tr>
-            <tr *ngFor="let item of Tarefas">
+            <tr *ngFor="let item of dataService.Tarefas">
                 <td>{{ item.id}} </td> 
                 <td>{{ item.titulo }} </td>
                 <td *ngIf="item.concluida; else naoconcluida">Concluída</td>
-                <ng-template #naoconcluida><td>Não concluida</td></ng-template> 
+                <ng-template #naoconcluida><td>Pendente</td></ng-template> 
                 <td>{{ item.prioridade }} </td>
                 <td>{{item.dataCriacao}}</td>
             </tr>
@@ -71,12 +72,12 @@
                 <th>Data de cadastro</th>
             </tr>
 
-            <ng-container *ngFor="let item of Tarefas">
+            <ng-container *ngFor="let item of dataService.Tarefas">
             <tr *ngIf="item.concluida === true">
                 <td>{{ item.id}} </td> 
                 <td>{{ item.titulo }} </td>
                 <td *ngIf="item.concluida; else naoconcluida">Concluída</td>
-                <ng-template #naoconcluida><td>Não concluida</td></ng-template> 
+                <ng-template #naoconcluida><td>Pendente</td></ng-template> 
                 <td>{{ item.prioridade }} </td>
                 <td>{{item.dataCriacao}}</td>
             </tr>
@@ -96,12 +97,12 @@
                 <th>Data de cadastro</th>
             </tr>
 
-            <ng-container *ngFor="let item of Tarefas">
+            <ng-container *ngFor="let item of dataService.Tarefas">
             <tr *ngIf="item.concluida === false">
                 <td>{{ item.id}} </td> 
                 <td>{{ item.titulo }} </td>
                 <td *ngIf="item.concluida; else naoconcluida">Concluída</td>
-                <ng-template #naoconcluida><td>Não concluida</td></ng-template> 
+                <ng-template #naoconcluida><td>Pendente</td></ng-template> 
                 <td>{{ item.prioridade }} </td>
                 <td>{{item.dataCriacao}}</td>
             </tr>
